@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bí Mật Dành Riêng Cho Bạn!</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    
+    <div class="balloon-container" id="balloonContainer"></div>
+
+    <div id="loginScreen" class="screen active">
+        <div class="login-card">
+            <div class="cute-icon">🎂</div>
+            <h2>Hôm nay sinh nhật của ai ta? 🤔</h2>
+            <input type="text" id="nameInput" placeholder="Nhập tên người ấy vào đây nha..." autocomplete="off">
+            <p id="errorMessage" class="error-text hidden">Hình như hơi nhầm bạn ơi! 🤭</p>
+            <button id="btnSubmitLogin" class="btn-login">Kiểm tra ngay ✨</button>
+        </div>
+    </div>
+
+    <div id="dashboardScreen" class="screen hidden">
+        <div class="dashboard-content">
+            <h1 class="main-title greeting-text" id="greetingText">Chúc mừng sinh nhật</h1>
+            <p class="subtitle" style="margin-bottom: 30px; font-size: 1.2rem;">Hãy chọn một nơi bạn muốn đến nhé!</p>
+            
+            <div class="dashboard-layout">
+                <div class="dashboard-left">
+                    <div class="cute-calendar">
+                        <div class="calendar-header">Tháng 6</div>
+                        <div class="calendar-body">
+                            <div class="cal-day-name">T2</div>
+                            <div class="cal-day-name">T3</div>
+                            <div class="cal-day-name">T4</div>
+                            <div class="cal-day-name">T5</div>
+                            <div class="cal-day-name">T6</div>
+                            <div class="cal-day-name">T7</div>
+                            <div class="cal-day-name">CN</div>
+                            <div class="cal-day text-muted">1</div>
+                            <div class="cal-day text-muted">2</div>
+                            <div class="cal-day text-muted">3</div>
+                            <div class="cal-day text-muted">4</div>
+                            <div class="cal-day text-muted">5</div>
+                            <div class="cal-day text-muted">6</div>
+                            <div class="cal-day text-muted">7</div>
+
+                            <div class="cal-day">8</div>
+                            <div class="cal-day">9</div>
+                            <div class="cal-day target-day">10</div>
+                            <div class="cal-day">11</div>
+                            <div class="cal-day">12</div>
+                            <div class="cal-day">13</div>
+                            <div class="cal-day">14</div>
+
+                            <div class="cal-day text-muted">15</div>
+                            <div class="cal-day text-muted">16</div>
+                            <div class="cal-day text-muted">17</div>
+                            <div class="cal-day text-muted">18</div>
+                            <div class="cal-day text-muted">19</div>
+                            <div class="cal-day text-muted">20</div>
+                            <div class="cal-day text-muted">21</div>
+
+                            <div class="cal-day text-muted">22</div>
+                            <div class="cal-day text-muted">23</div>
+                            <div class="cal-day text-muted" style="letter-spacing: 2px;">...</div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div><div class="cal-day"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dashboard-right">
+                    <div class="options-container vertical-options">
+                        <div class="option-card" id="btnGoToGifts">
+                            <div class="option-icon">🎁</div>
+                            <h3>Kho Quà Bí Mật</h3>
+                            <p>Những món quà nhỏ gửi đến bạn</p>
+                        </div>
+                        <div class="option-card" id="btnGoToChill">
+                            <div class="option-icon">🌸</div>
+                            <h3>Góc Bình Yên</h3>
+                            <p>Nhạc chill và hoa anh đào</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="homeScreen" class="screen hidden">
+        <button class="btn-back-cute" id="btnBackFromGifts">
+            <i class="fas fa-chevron-left"></i> Trang chính
+        </button>
+        <div class="card-wrapper" style="max-width: 800px;">
+            <div class="home-header">
+                <h1 class="main-title">Kho Quà Bí Mật 🎁</h1>
+                <p class="subtitle">Chính xác! Hãy chọn một hộp quà bên dưới nhé!</p>
+            </div>
+            <div class="gifts-grid" id="giftsGrid"></div>
+        </div>
+    </div>
+
+    <div id="wishScreen" class="screen hidden">
+        <button class="btn-back-cute" id="btnBack">
+            <i class="fas fa-chevron-left"></i> Kho quà
+        </button>
+        <div class="card-wrapper">
+            <div class="birthday-card">
+                <div class="profile-frame">
+                    <img id="wishImage" src="" alt="Ảnh kỷ niệm">
+                </div>
+                <h1 class="main-title" id="wishTitle">Happy Birthday!</h1>
+                <h2 class="recipient-name" id="wishRecipient"></h2>
+                <div class="wish-box" style="display: block;">
+                    <p id="typewriterText" class="wish-text"></p>
+                    <p class="signature" id="signatureAuthor"></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="cherryBlossomScreen" class="screen hidden game-scene-screen">
+        <div id="fireworksContainer"></div>
+        <div id="petalsContainer"></div>
+
+        <div class="romantic-wish-container">
+            <div class="scrolling-text">
+                <p>Thêm một tuổi mới,</p>
+                <p>Thêm nhiều niềm vui.</p>
+                <p>Chúc cậu luôn giữ nụ cười,</p>
+                <p>Và một đời an nhiên, rực rỡ...</p>
+                <p class="wish-signature">- Từ một người luôn quan tâm cậu -</p>
+            </div>
+        </div>
+        
+        <button class="btn-game-back" id="btnBackFromChill">
+            <i class="fas fa-arrow-left"></i> Thoát
+        </button>
+
+        <div class="game-view">
+            <svg viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" class="full-screen-svg">
+                <defs>
+                    <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#0b0f19" />
+                        <stop offset="40%" stop-color="#1a1a3a" />
+                        <stop offset="100%" stop-color="#4a2545" stop-opacity="0.8"/>
+                    </linearGradient>
+                    <linearGradient id="trunkGrad2" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%" stop-color="#2a1610" />
+                        <stop offset="50%" stop-color="#3d2314" />
+                        <stop offset="100%" stop-color="#1e100b" />
+                    </linearGradient>
+                    <radialGradient id="sakuraGlow" cx="50%" cy="30%" r="70%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+                        <stop offset="30%" stop-color="#ffb8c6" stop-opacity="0.9"/>
+                        <stop offset="80%" stop-color="#ff7ea5" stop-opacity="0.85"/>
+                        <stop offset="100%" stop-color="#d65a88" stop-opacity="0.8"/>
+                    </radialGradient>
+                    <radialGradient id="sakuraDark" cx="50%" cy="70%" r="70%">
+                        <stop offset="0%" stop-color="#ff8fab" stop-opacity="0.9"/>
+                        <stop offset="100%" stop-color="#a03c5d" stop-opacity="0.95"/>
+                    </radialGradient>
+                    <linearGradient id="grassGrad2" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#142618"/>
+                        <stop offset="100%" stop-color="#060c07"/>
+                    </linearGradient>
+                    <filter id="glow">
+                        <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                        <feMerge>
+                            <feMergeNode in="coloredBlur"/>
+                            <feMergeNode in="SourceGraphic"/>
+                        </feMerge>
+                    </filter>
+                    <symbol id="grass-tuft" viewBox="0 0 20 20">
+                        <path d="M10,20 Q8,10 2,12 M10,20 Q10,5 10,15 M10,20 Q12,10 18,12" stroke="#1f4024" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                    </symbol>
+                </defs>
+
+                <rect width="1920" height="1080" fill="url(#skyGrad)"/>
+                
+                <g class="shooting-stars">
+                    <line x1="1500" y1="100" x2="1300" y2="300" stroke="#fff" stroke-width="2" opacity="0" class="star-1"/>
+                    <line x1="800" y1="50" x2="500" y2="350" stroke="#fff" stroke-width="1.5" opacity="0" class="star-2"/>
+                </g>
+
+                <path d="M-200,650 Q300,500 700,580 T1400,500 T2100,650 L2100,1080 L-200,1080 Z" fill="#1b1224" opacity="0.6"/>
+                <path d="M-100,750 Q400,620 900,680 T1600,620 T2000,750 L2000,1080 L-100,1080 Z" fill="#140b1a"/>
+
+                <path d="M-100,880 Q500,760 1000,820 T2000,880 L2000,1080 L-100,1080 Z" fill="url(#grassGrad2)"/>
+
+                <g class="environment-details">
+                    <use href="#grass-tuft" x="150" y="900" width="35" height="35"/><use href="#grass-tuft" x="350" y="940" width="45" height="45"/>
+                    <use href="#grass-tuft" x="600" y="890" width="30" height="30"/><use href="#grass-tuft" x="850" y="920" width="40" height="40"/>
+                    <use href="#grass-tuft" x="1250" y="880" width="35" height="35"/><use href="#grass-tuft" x="1550" y="930" width="50" height="50"/>
+                    <use href="#grass-tuft" x="1800" y="900" width="35" height="35"/><use href="#grass-tuft" x="80" y="1000" width="65" height="65"/>
+                    <use href="#grass-tuft" x="450" y="1020" width="75" height="75"/><use href="#grass-tuft" x="950" y="870" width="55" height="55"/> 
+                    <use href="#grass-tuft" x="1050" y="920" width="45" height="45"/><use href="#grass-tuft" x="1450" y="1010" width="70" height="70"/>
+                    <use href="#grass-tuft" x="1850" y="1030" width="60" height="60"/>
+                </g>
+
+                <g class="main-tree-group">
+                    <path d="M1400,870 Q1330,500 1380,100 L1450,100 Q1500,500 1430,870 Z" fill="url(#trunkGrad2)"/>
+                    <path d="M1360,880 Q1380,840 1400,850" stroke="url(#trunkGrad2)" stroke-width="20" fill="none" stroke-linecap="round"/>
+                    <path d="M1460,890 Q1450,850 1430,840" stroke="url(#trunkGrad2)" stroke-width="18" fill="none" stroke-linecap="round"/>
+                    
+                    <path d="M1410,350 Q1150,300 950,420" stroke="url(#trunkGrad2)" stroke-width="28" fill="none" stroke-linecap="round"/>
+                    <path d="M1420,450 Q1650,380 1800,450" stroke="url(#trunkGrad2)" stroke-width="24" fill="none" stroke-linecap="round"/>
+                    <path d="M1390,200 Q1200,100 1050,180" stroke="url(#trunkGrad2)" stroke-width="20" fill="none" stroke-linecap="round"/>
+                    <path d="M1440,250 Q1600,150 1750,220" stroke="url(#trunkGrad2)" stroke-width="18" fill="none" stroke-linecap="round"/>
+                    
+                    <path d="M1100,365 Q1000,320 920,380" stroke="url(#trunkGrad2)" stroke-width="12" fill="none" stroke-linecap="round"/>
+                    <path d="M1650,415 Q1720,360 1780,390" stroke="url(#trunkGrad2)" stroke-width="10" fill="none" stroke-linecap="round"/>
+                    <path d="M1150,165 Q1050,120 980,190" stroke="url(#trunkGrad2)" stroke-width="8" fill="none" stroke-linecap="round"/>
+
+                    <g class="sakura-leaves-bg" fill="url(#sakuraDark)">
+                        <ellipse cx="1400" cy="200" rx="400" ry="250"/>
+                        <ellipse cx="1050" cy="380" rx="250" ry="180"/>
+                        <ellipse cx="1750" cy="380" rx="220" ry="160"/>
+                    </g>
+                    <g class="sakura-leaves-mid" fill="url(#sakuraGlow)">
+                        <circle cx="1000" cy="400" r="140"/><circle cx="1150" cy="350" r="150"/>
+                        <circle cx="1700" cy="420" r="130"/><circle cx="1550" cy="350" r="140"/>
+                        <circle cx="1100" cy="180" r="120"/><circle cx="1280" cy="150" r="140"/>
+                        <circle cx="1650" cy="220" r="130"/><circle cx="1500" cy="180" r="150"/>
+                        <circle cx="1380" cy="100" r="160"/><circle cx="1450" cy="120" r="150"/>
+                        <circle cx="1300" cy="300" r="150"/><circle cx="1500" cy="320" r="160"/>
+                    </g>
+                    <g class="sakura-leaves-front" fill="#ffffff" opacity="0.4">
+                        <circle cx="980" cy="350" r="60"/><circle cx="1120" cy="280" r="70"/>
+                        <circle cx="1680" cy="360" r="65"/><circle cx="1530" cy="290" r="70"/>
+                        <circle cx="1250" cy="80" r="60"/><circle cx="1400" cy="50" r="80"/>
+                    </g>
+                </g>
+
+                <g class="stone-lantern" transform="translate(600, 770)">
+                    <rect x="20" y="100" width="40" height="15" rx="2" fill="#303841"/>
+                    <rect x="25" y="40" width="30" height="60" rx="2" fill="#3d4654"/>
+                    <rect x="15" y="25" width="50" height="15" rx="3" fill="#303841"/>
+                    <rect x="22" y="30" width="36" height="35" rx="2" fill="#fbc531" filter="url(#glow)"/>
+                    <path d="M10,25 L40,-5 L70,25 Z" fill="#3d4654"/>
+                    <circle cx="40" cy="-5" r="5" fill="#303841"/>
+                </g>
+
+                <g class="fireflies" fill="#fbc531" filter="url(#glow)">
+                    <circle class="firefly ff-1" cx="500" cy="820" r="3.5"/>
+                    <circle class="firefly ff-2" cx="650" cy="750" r="3"/>
+                    <circle class="firefly ff-3" cx="780" cy="870" r="4"/>
+                    <circle class="firefly ff-4" cx="950" cy="800" r="2.5"/>
+                    <circle class="firefly ff-5" cx="1100" cy="840" r="3.5"/>
+                    <circle class="firefly ff-6" cx="1250" cy="770" r="3"/>
+                    <circle class="firefly ff-7" cx="1600" cy="820" r="4"/>
+                </g>
+
+                <g class="anime-girl-group" transform="translate(1200, 750)">
+                    <path d="M22,110 L25,140 L32,140 L28,110 Z" fill="#f5cdb5"/>
+                    <path d="M40,110 L40,140 L47,140 L45,110 Z" fill="#f5cdb5"/>
+                    <path d="M23,135 L33,135 L34,142 L22,142 Z" fill="#2d3436"/>
+                    <path d="M39,135 L49,135 L48,142 L38,142 Z" fill="#2d3436"/>
+                    
+                    <g class="anime-girl-dress">
+                        <path d="M35,45 Q70,90 60,115 Q30,120 10,110 Q5,80 35,45 Z" fill="#c0392b"/>
+                        <path d="M35,40 Q65,85 50,115 Q25,115 15,105 Q15,70 35,40 Z" fill="#e74c3c"/>
+                        <path d="M25,65 Q35,70 45,60" stroke="#fff" stroke-width="3" fill="none"/>
+                    </g>
+                    
+                    <path d="M25,55 Q15,70 20,85" stroke="#e1b8a0" stroke-width="5" fill="none" stroke-linecap="round"/>
+                    
+                    <path d="M40,55 Q55,70 70,60" stroke="#f5cdb5" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+                    <g class="girl-balloon-group" transform="translate(70, 60)">
+                        <line x1="0" y1="0" x2="-5" y2="-70" stroke="#f1f2f6" stroke-width="1.5" stroke-dasharray="3,3"/>
+                        <path class="held-balloon-body" d="M-5,-115 C-25,-115 -35,-95 -25,-75 C-20,-65 -5,-60 5,-60 C20,-60 25,-80 20,-100 C15,-115 5,-115 -5,-115 Z" fill="#ff4757"/>
+                        <ellipse cx="-15" cy="-98" rx="4" ry="7" fill="#ffffff" opacity="0.4"/>
+                    </g>
+                    <path d="M32,35 L38,35 L35,45 Z" fill="#f5cdb5"/>
+                    <circle cx="35" cy="22" r="14" fill="#f5cdb5"/>
+                    
+                    <g class="anime-girl-hair">
+                        <path class="hair-back" d="M35,8 Q10,20 -5,50 Q10,45 25,25 Z" fill="#1e1e1e"/>
+                        <path class="hair-back" d="M35,8 Q0,30 -15,70 Q5,55 25,25 Z" fill="#2d3436"/>
+                        <path d="M35,5 Q50,5 52,25 Q45,15 35,8 Z" fill="#2d3436"/>
+                        <path d="M35,5 Q20,5 18,25 Q25,10 35,8 Z" fill="#2d3436"/>
+                        <circle cx="35" cy="18" r="15" fill="#2d3436"/>
+                        <path class="hair-strand-front" d="M35,10 Q55,20 60,40" stroke="#2d3436" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+                        <path class="hair-strand-front" d="M35,8 Q65,15 75,35" stroke="#1e1e1e" stroke-width="2" fill="none" stroke-linecap="round"/>
+                    </g>
+                </g>
+
+                <g class="anime-cat-group" transform="translate(1080, 830)">
+                    <path class="cat-tail-anime" d="M45,25 Q75,35 60,5 T70,15" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
+                    
+                    <g class="cat-body">
+                        <ellipse cx="30" cy="20" rx="25" ry="18" fill="#fff"/>
+                        <ellipse cx="28" cy="15" rx="10" ry="6" fill="#ffeaa7"/> </g>
+                    
+                    <g class="cat-head">
+                        <circle cx="15" cy="12" r="13" fill="#fff"/>
+                        <polygon points="5,5 -3,-12 10,-2" fill="#fff"/>
+                        <polygon points="22,2 30,-10 32,5" fill="#fff"/>
+                        <polygon points="5,3 -1,-8 9,-1" fill="#ffb8c6"/>
+                        <polygon points="23,3 28,-7 30,4" fill="#ffb8c6"/>
+                        <path d="M8,10 Q12,14 16,10" stroke="#2d3436" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                        <path d="M22,12 Q24,15 26,13" stroke="#2d3436" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    </g>
+                </g>
+            </svg>
+            
+            <div class="game-hud-player">
+                <div class="hud-info">
+                    <span class="hud-icon">♫</span>
+                    <span class="hud-track-name">Goodbye - DIA (Korean)</span>
+                </div>
+                <audio id="bgMusic" controls loop>
+                    <source src="DIA.mp3" type="audio/mpeg">
+                    Trình duyệt của bạn không hỗ trợ phát nhạc.
+                </audio>
+            </div>
+        </div>
+    </div>
+
+    <div id="confirmModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Bạn có chắc chắn muốn chọn phần quà này không? 🥺</h2>
+            <div class="modal-buttons">
+                <button id="btnYes" class="btn-modal btn-yes">Đồng ý 😍</button>
+                <button id="btnNo" class="btn-modal btn-no">Từ chối 😒</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
