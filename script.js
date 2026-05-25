@@ -1,32 +1,32 @@
 // ================= DATA QUÀ TẶNG =================
 const giftsData = [
     {
-        id: 1, giftName: "Quà Bí Mật 1", icon: "🎁", 
+        id: 1, giftName: "Quà Bí Mật", icon: "🎁", 
         image: "https://images.unsplash.com/photo-1530103862676-de3c9da59a72?auto=format&fit=crop&w=400&q=80",
-        title: "Dành cho tuổi mới!", recipient: "Gửi tới bạn yêu",
-        wishText: "Chúc bạn tuổi mới luôn ngập tràn niềm vui. Mong mọi dự định của bạn đều thành hiện thực nhé!",
-        signature: "- Ký tên: XYZ -"
+        title: "Dành cho tuổi mới!", recipient: "Gửi tới cô giáo",
+        wishText: "Chúc Cô giáo tuổi mới luôn ngập tràn niềm vui. Mong mọi dự định của bạn đều thành hiện thực nhé!",
+        signature: "- Ký tên: Demon -"
     },
     {
         id: 2, giftName: "Quà Tinh Thần", icon: "💌",
         image: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=400&q=80",
         title: "Đừng buồn nhé!", recipient: "Người bạn kiên cường",
         wishText: "Cuộc sống có lúc thăng lúc trầm, nhưng hãy nhớ mình luôn ở đây ủng hộ cậu. Chúc cậu một đời an nhiên!",
-        signature: "- Best Friend -"
+        signature: "- Ký tên: Bạn học cũ -"
     },
     {
         id: 3, giftName: "Quà Chữa Lành", icon: "🍀",
         image: "https://images.unsplash.com/photo-1494774157365-9e04c6720e47?auto=format&fit=crop&w=400&q=80",
         title: "Nụ cười là liều thuốc", recipient: "Gửi ánh mặt trời",
         wishText: "Hãy luôn giữ nụ cười trên môi, vì nụ cười của cậu rất đẹp và truyền cảm hứng cho rất nhiều người đấy!",
-        signature: "- Cậu bé nhút nhát -"
+        signature: "- Ký tên: Người bạn màu mè -"
     },
     {
         id: 4, giftName: "Quà Đặc Biệt", icon: "👑",
         image: "https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=400&q=80",
         title: "Thành công nhé!", recipient: "Gửi CEO tương lai",
         wishText: "Chúc dự án sắp tới của cậu thành công rực rỡ. Mình tin là cậu sẽ làm được những điều phi thường!",
-        signature: "- Fan hâm mộ số 1 -"
+        signature: "- Ký tên: Fan hâm mộ số 1 -"
     }
 ];
 
@@ -63,9 +63,13 @@ const fireworksContainer = document.getElementById('fireworksContainer');
 
 // ================= LOGIC ĐĂNG NHẬP =================
 function checkPassword() {
-    const enteredName = nameInput.value.trim().toLowerCase();
+    // Thêm normalize('NFC') để đồng nhất bảng mã tiếng Việt giữa bàn phím điện thoại và máy tính
+    const enteredName = nameInput.value.trim().toLowerCase().normalize('NFC');
     
-    if (enteredName === "lê thùy linh" || enteredName === "cô giáo tập sự") {
+    // Vì đã dùng toLowerCase(), chúng ta chỉ cần so sánh với phiên bản chữ thường chuẩn nhất
+    if (enteredName === "lê thùy linh" || enteredName === "lê thuỳ linh" || enteredName === "cô giáo tập sự") {
+        
+        // nameInput.value.trim() ở đây sẽ giữ nguyên định dạng viết hoa/viết thường ban đầu của người nhập để hiển thị cho đẹp
         greetingText.innerText = "Chúc mừng sinh nhật " + nameInput.value.trim() + " nha! 🎉";
         loginScreen.classList.remove('active');
         loginScreen.classList.add('hidden');
@@ -293,24 +297,32 @@ function createFireworkRocket() {
     const rocket = document.createElement('div');
     rocket.classList.add('firework-rocket');
     
+    // Tọa độ logic theo phần trăm chiều ngang (10% đến 90%)
     const startX = 10 + Math.random() * 80; 
     rocket.style.left = `${startX}%`;
-    const riseHeight = -(60 + Math.random() * 30); // Bay cao ngẫu nhiên
+    
+    const isMobile = window.innerWidth <= 850;
+    // Độ cao bay lên (mobile bay thấp hơn để nổ trong màn hình)
+    const baseRise = isMobile ? 35 : 60; 
+    const riseHeight = -(baseRise + Math.random() * 20); 
     rocket.style.setProperty('--rise-height', `${riseHeight}vh`);
     
     rocket.addEventListener('animationend', (e) => {
         if (e.animationName === 'rise') {
-            const rect = rocket.getBoundingClientRect();
-            launchExplosion(rect.left + rect.width / 2, rect.top);
+            // TRUYỀN TRỰC TIẾP TỌA ĐỘ LOGIC sang hàm nổ (Không dùng getBoundingClientRect nữa)
+            launchExplosion(startX, riseHeight);
             rocket.remove(); 
         }
     });
     fireworksContainer.appendChild(rocket);
 }
 
-function launchExplosion(x, y) {
+function launchExplosion(startX, riseHeight) {
     if (!fireworksContainer) return;
-    const particleCount = 75 + Math.floor(Math.random() * 20); // Chùm 40-60 hạt
+    
+    const isMobile = window.innerWidth <= 850;
+    const baseParticles = isMobile ? 25 : 75;
+    const particleCount = baseParticles + Math.floor(Math.random() * 15); 
     const color = fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
     
     for (let i = 0; i < particleCount; i++) {
@@ -319,11 +331,15 @@ function launchExplosion(x, y) {
         particle.style.backgroundColor = color;
         particle.style.boxShadow = `0 0 10px ${color}, 0 0 20px ${color}`; 
         
-        particle.style.left = `${x}px`;
-        particle.style.top = `${y}px`;
+        // --- CHUẨN HÓA LẠI TỌA ĐỘ ĐIỂM NỔ ---
+        // Giữ nguyên trục X
+        particle.style.left = `${startX}%`;
+        // Trục Y: Pháo xuất phát từ bottom: -20px, cộng thêm độ cao bay lên (riseHeight)
+        particle.style.bottom = `calc(${Math.abs(riseHeight)}vh - 20px)`; 
+        particle.style.top = 'auto'; // Xóa thuộc tính top nếu có
         
         const angle = Math.random() * Math.PI * 2; 
-        const velocity = 60 + Math.random() * 120; 
+        const velocity = isMobile ? (35 + Math.random() * 40) : (60 + Math.random() * 120); 
         const dx = Math.cos(angle) * velocity;
         const dy = Math.sin(angle) * velocity + 25; 
         

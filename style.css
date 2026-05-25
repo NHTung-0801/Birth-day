@@ -523,3 +523,241 @@ body {
     .romantic-wish-container { top: 15%; left: 5%; width: 90%; }
     .scrolling-text p { font-size: 1.1rem; }
 }
+
+/* =================================================================
+   10. TỐI ƯU HÓA CHO THIẾT BỊ DI ĐỘNG (MOBILE RESPONSIVE)
+   ================================================================= */
+
+/* Áp dụng cho các màn hình có chiều rộng dưới 850px (Điện thoại & Tablet nhỏ) */
+@media (max-width: 850px) {
+    html, body {
+        background: linear-gradient(135deg, #d6e8ff 0%, #eaf6ff 100%) !important;
+    }
+    /* 1. Tối ưu Dashboard & Lịch */
+    .greeting-text { font-size: 2rem; line-height: 1.3; }
+    .dashboard-layout { gap: 20px; flex-direction: column; }
+    .cute-calendar { 
+        max-width: 100%; 
+        transform: rotate(0deg); /* Bỏ hiệu ứng xoay nghiêng trên đt để tiết kiệm không gian */
+        margin-bottom: 20px;
+    }
+    .option-card { max-width: 100%; padding: 15px; }
+
+    /* 2. Tối ưu màn hình Đăng Nhập */
+    .login-card { padding: 30px 20px; width: 95%; }
+    .cute-icon { font-size: 3.5rem; margin-bottom: 5px; }
+    .login-card h2 { font-size: 1.2rem; }
+
+    /* 3. Tối ưu Kho Quà (Gifts Grid) */
+    .home-header { padding: 20px 15px; margin-bottom: 20px; }
+    .gifts-grid { 
+        grid-template-columns: repeat(2, 1fr); /* Ép hiển thị 2 cột quà */
+        gap: 12px; /* Giảm khoảng cách để không bị tràn màn hình */
+    }
+    .gift-item { padding: 20px 10px; }
+    .gift-icon { font-size: 3rem; margin-bottom: 10px; }
+    .gift-name { font-size: 1.1rem; }
+
+    /* 4. Tối ưu Khung Thiệp Chúc Mừng */
+    #wishScreen {
+        padding: 20px 10px !important; /* Thu hẹp tối đa khoảng trống viền ngoài của màn hình */
+    }
+
+    #wishScreen .card-wrapper {
+        max-width: 100% !important; 
+        width: 92% !important; /* Ép khung chứa tăng tốc chiếm 100% chiều ngang */
+        padding: 0 5px;
+    }
+
+    .birthday-card { 
+        width: 100% !important;
+        padding: 35px 20px !important; /* Tăng khoảng đệm bên trong để chữ nội dung thụt vào một chút cho đẹp */
+        border-radius: 20px; /* Bo góc nhẹ lại một chút để hợp với màn hình vuông của điện thoại */
+        box-shadow: 0 15px 40px rgba(232, 67, 147, 0.15);
+    }
+
+    .profile-frame { 
+        width: 130px; /* Tăng kích thước khung ảnh kỷ niệm lên một chút cho cân xứng với thiệp to */
+        height: 130px; 
+        margin-bottom: 20px;
+    }
+
+    .main-title { 
+        font-size: 1.7rem; /* Tăng cỡ chữ tiêu đề */
+        line-height: 1.3;
+    }
+
+    .recipient-name { 
+        font-size: 1.2rem; 
+        margin-bottom: 25px; 
+    }
+
+    .wish-box { 
+        padding: 22px 20px; 
+        background: rgba(255, 255, 255, 0.9) !important; /* Làm hộp chữ rõ hơn */
+    }
+
+    .wish-text { 
+        font-size: 1.05rem; /* Tăng nhẹ cỡ chữ lời chúc để đọc cực kỳ dễ dàng trên điện thoại */
+        line-height: 1.7; 
+        text-align: justify; 
+    }
+    
+    .signature {
+        font-size: 1.1rem;
+    }
+
+    /* 5. Tối ưu Góc Bình Yên (Game Scene) */
+    /* Căn lại thanh phát nhạc để không bị tràn viền phải */
+    .game-hud-player { 
+        width: calc(100% - 40px); /* Cách đều 2 bên mép đt 20px */
+        left: 20px; 
+        right: 20px; 
+        bottom: 20px; 
+        padding: 10px 15px;
+    }
+    /* Chỉnh lời chúc trôi không bị đè vào các nút bấm */
+    .romantic-wish-container {
+        top: 15%; 
+        left: 5%; 
+        width: 90%; 
+        text-align: center;
+    }
+    .scrolling-text p { font-size: 1.15rem; }
+    
+    /* 6. Tối ưu Nút Back & Modal Xác Nhận */
+    .btn-back-cute, .btn-game-back { 
+        padding: 8px 15px; 
+        font-size: 1rem; 
+        /* Căn chỉnh tránh rãnh tai thỏ (notch) trên iPhone */
+        top: max(15px, env(safe-area-inset-top)); 
+        left: max(15px, env(safe-area-inset-left));
+    }
+    .modal-content { padding: 30px 20px; width: 92%; }
+    .modal-content h2 { font-size: 1.25rem; margin-bottom: 25px; }
+    .btn-modal { padding: 12px 20px; font-size: 14px; }
+}
+
+/* Áp dụng riêng cho các dòng điện thoại có màn hình cực nhỏ (dưới 400px như iPhone SE) */
+@media (max-width: 400px) {
+    .gifts-grid { grid-template-columns: 1fr; } /* Hiển thị 1 hộp quà trên mỗi hàng cho to và rõ */
+    .dashboard-layout { margin-top: 15px; }
+}
+
+/* =================================================================
+   11. ÉP XOAY NGANG GÓC BÌNH YÊN (CHỈ TRÊN ĐIỆN THOẠI)
+   ================================================================= */
+
+/* 1. KHI NGƯỜI DÙNG CẦM DỌC ĐIỆN THOẠI -> ÉP XOAY NGANG 90 ĐỘ */
+@media (max-width: 850px) and (orientation: portrait) {
+    #cherryBlossomScreen {
+        width: 100vh !important;
+        width: 100dvh !important;
+        height: 100vw !important;
+        height: 100dvw !important;
+        min-height: 100vw !important;
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+    }
+
+    #cherryBlossomScreen .game-view { height: 100% !important; }
+    #cherryBlossomScreen.hidden { transform: translate(-50%, -50%) rotate(90deg) scale(0.95) !important; }
+    #cherryBlossomScreen.active { transform: translate(-50%, -50%) rotate(90deg) scale(1) !important; }
+
+    /* ĐÃ SỬA: Thu nhỏ, làm mờ thanh nhạc và ép sát vào góc */
+    #cherryBlossomScreen .game-hud-player {
+        width: 240px !important; 
+        padding: 8px 12px !important;
+        background: rgba(20, 15, 30, 0.4) !important; 
+        backdrop-filter: blur(8px) !important;
+        /* Trong màn hình xoay 90 độ, top & right sẽ là góc phải dưới vật lý */
+        bottom: 25px !important;
+        right: 25px !important;
+        top: auto !important; 
+        left: auto !important;
+
+        transform: scale(0.85) !important; 
+        transform-origin: bottom right !important; /* Giữ điểm neo ở góc trên phải */
+    }
+
+    /* ĐÃ SỬA: Dịch chữ lên trên và chỉnh lại size */
+    #cherryBlossomScreen .romantic-wish-container {
+        top: 5% !important; /* Đẩy sát lên mép trên màn hình */
+        left: 12% !important; /* Lùi vào một chút để né tai thỏ/rãnh camera */
+        width: 80% !important;
+        text-align: left !important;
+    }
+    
+    #cherryBlossomScreen .scrolling-text p {
+        font-size: 1.15rem !important; /* Chữ nhỏ lại một chút để không bị che khuất */
+        margin-bottom: 5px !important;
+    }
+}
+
+/* 2. KHI NGƯỜI DÙNG CHỦ ĐỘNG XOAY NGANG ĐIỆN THOẠI -> KHÔNG ÉP XOAY NỮA */
+@media (max-width: 850px) and (orientation: landscape) {
+    /* Chỉ cần sắp xếp lại các thành phần cho đẹp */
+    #cherryBlossomScreen .game-hud-player {
+        width: 320px !important;
+        left: auto !important;
+        right: 20px !important;
+        bottom: 20px !important;
+    }
+    #cherryBlossomScreen .romantic-wish-container {
+        top: 15% !important;
+        left: 8% !important;
+        text-align: left !important;
+    }
+}
+
+/* =================================================================
+   12. TĂNG NHẸ BIÊN ĐỘ CHUYỂN ĐỘNG TRÊN ĐIỆN THOẠI (TỐI ƯU HIỆU NĂNG)
+   ================================================================= */
+@media (max-width: 850px) {
+    /* 1. Tăng nhẹ độ đung đưa của cây anh đào (Từ 1.5 độ lên 2.5 độ) */
+    @keyframes swayTree { 
+        0%, 100% { transform: scale(0.9) rotate(0deg); } 
+        50% { transform: scale(0.9) rotate(2.5deg); } 
+    }
+    
+    /* 2. Nhịp đập của tán lá anh đào (Từ 1.02 lên 1.035) */
+    @keyframes pulseLeaves { 
+        0% { transform: scale(1); } 
+        100% { transform: scale(1.035); } 
+    }
+
+    /* 3. Biên độ gió thổi váy và tóc cô gái (Tăng vừa phải) */
+    @keyframes dressWind { 
+        0% { transform: skewX(0deg); } 
+        100% { transform: skewX(-8deg); } /* Máy tính là -5 độ */
+    }
+    @keyframes headBob { 
+        0%, 100% { transform: rotate(0deg); } 
+        50% { transform: rotate(4.5deg); } /* Máy tính là 3 độ */
+    }
+    @keyframes hairSway { 
+        0% { transform: rotate(0deg); } 
+        100% { transform: rotate(14deg); } /* Máy tính là 10 độ */
+    }
+    
+    /* 4. Tăng nhẹ độ đung đưa của chùm bóng bay trên tay cô bé */
+    @keyframes girlBalloonSway {
+        0% { transform: translate(70px, 60px) rotate(-4deg); } 
+        100% { transform: translate(73px, 57px) rotate(8deg); } 
+    }
+
+    /* 5. Cử động của chú mèo (thở, gật đầu, vẫy đuôi) - Tăng rất nhẹ */
+    @keyframes catBreathe { 
+        0%, 100% { transform: scaleY(1); } 
+        50% { transform: scaleY(1.10); } /* Máy tính là 1.08 */
+    }
+    @keyframes catHeadNod { 
+        0%, 100% { transform: rotate(0deg); } 
+        50% { transform: rotate(-7deg); } /* Máy tính là -5 độ */
+    }
+    @keyframes tailWagSmooth { 
+        0%, 100% { transform: rotate(0deg); } 
+        50% { transform: rotate(-18deg); } /* Máy tính là -15 độ */
+    }
+}
