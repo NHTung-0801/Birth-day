@@ -21,6 +21,71 @@
             <input type="text" id="nameInput" placeholder="Nhập tên người ấy vào đây nha..." autocomplete="off">
             <p id="errorMessage" class="error-text hidden">Hình như hơi nhầm bạn ơi! 🤭</p>
             <button id="btnSubmitLogin" class="btn-login">Kiểm tra ngay ✨</button>
+            <button id="btnRunaway" class="btn-runaway">Bỏ qua 😒</button>
+        </div>
+    </div>
+
+    <!-- MATRIX COUNTDOWN SCREEN -->
+    <div id="matrixScreen" class="screen hidden">
+        <canvas id="matrixCanvas"></canvas>
+        <div id="countdownOverlay">
+            <span id="countdownText">3</span>
+        </div>
+    </div>
+
+    <!-- BIRTHDAY SPLASH SCREEN -->
+    <div id="birthdaySplashScreen" class="screen hidden">
+        <canvas id="starCanvas"></canvas>
+        <div class="splash-content">
+            <div class="splash-candles" id="splashCandles"></div>
+            <div class="splash-hb-text">
+                <span class="splash-letter" style="--c:#ff6b6b">H</span><span class="splash-letter" style="--c:#ffa94d">A</span><span class="splash-letter" style="--c:#ffe066">P</span><span class="splash-letter" style="--c:#69db7c">P</span><span class="splash-letter" style="--c:#74c0fc">Y</span>
+                <br>
+                <span class="splash-letter" style="--c:#f783ac">B</span><span class="splash-letter" style="--c:#da77f2">I</span><span class="splash-letter" style="--c:#ff6b6b">R</span><span class="splash-letter" style="--c:#ffa94d">T</span><span class="splash-letter" style="--c:#ffe066">H</span><span class="splash-letter" style="--c:#69db7c">D</span><span class="splash-letter" style="--c:#74c0fc">A</span><span class="splash-letter" style="--c:#f783ac">Y</span>
+            </div>
+            <div class="splash-cat">
+                <svg viewBox="0 0 180 200" xmlns="http://www.w3.org/2000/svg" width="180" height="200">
+                    <!-- Body -->
+                    <ellipse cx="90" cy="145" rx="48" ry="42" fill="#fff" stroke="#e0e0e0" stroke-width="1.5"/>
+                    <!-- Tummy patch -->
+                    <ellipse cx="90" cy="150" rx="28" ry="25" fill="#fff9f0"/>
+                    <!-- Tail -->
+                    <path d="M138,155 Q175,145 168,118 Q162,100 148,108" stroke="#fff" stroke-width="10" fill="none" stroke-linecap="round"/>
+                    <!-- Head -->
+                    <circle cx="90" cy="95" r="40" fill="#fff" stroke="#e0e0e0" stroke-width="1.5"/>
+                    <!-- Ears -->
+                    <polygon points="60,68 52,45 76,62" fill="#fff"/>
+                    <polygon points="120,68 128,45 104,62" fill="#fff"/>
+                    <polygon points="62,66 56,50 74,63" fill="#ffb8c6"/>
+                    <polygon points="118,66 124,50 106,63" fill="#ffb8c6"/>
+                    <!-- Eyes closed/happy -->
+                    <path d="M74,90 Q80,84 86,90" stroke="#2d3436" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <path d="M94,90 Q100,84 106,90" stroke="#2d3436" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                    <!-- Nose + mouth -->
+                    <ellipse cx="90" cy="100" rx="4" ry="3" fill="#ffb8c6"/>
+                    <path d="M87,103 Q90,108 93,103" stroke="#2d3436" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+                    <!-- Whiskers -->
+                    <line x1="50" y1="98" x2="78" y2="100" stroke="#bbb" stroke-width="1.2"/>
+                    <line x1="50" y1="104" x2="78" y2="103" stroke="#bbb" stroke-width="1.2"/>
+                    <line x1="102" y1="100" x2="130" y2="98" stroke="#bbb" stroke-width="1.2"/>
+                    <line x1="102" y1="103" x2="130" y2="104" stroke="#bbb" stroke-width="1.2"/>
+                    <!-- Guitar body -->
+                    <ellipse cx="70" cy="168" rx="18" ry="22" fill="#c0392b" opacity="0.9"/>
+                    <ellipse cx="70" cy="162" rx="12" ry="13" fill="#c0392b"/>
+                    <rect x="80" y="138" width="6" height="38" rx="3" fill="#8B4513"/>
+                    <!-- Guitar strings -->
+                    <line x1="83" y1="140" x2="83" y2="172" stroke="#ffd700" stroke-width="0.8" opacity="0.8"/>
+                    <line x1="85" y1="140" x2="85" y2="172" stroke="#ffd700" stroke-width="0.8" opacity="0.8"/>
+                    <!-- Arms holding guitar -->
+                    <path d="M55,132 Q40,148 58,158" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
+                    <path d="M112,130 Q118,148 88,155" stroke="#fff" stroke-width="8" fill="none" stroke-linecap="round"/>
+                    <!-- Heart -->
+                    <path d="M88,185 Q90,182 92,185 Q96,182 96,186 Q96,190 90,194 Q84,190 84,186 Q84,182 88,185 Z" fill="#e74c3c"/>
+                    <!-- Blush -->
+                    <ellipse cx="70" cy="105" rx="8" ry="5" fill="#ffb8c6" opacity="0.5"/>
+                    <ellipse cx="110" cy="105" rx="8" ry="5" fill="#ffb8c6" opacity="0.5"/>
+                </svg>
+            </div>
         </div>
     </div>
 
@@ -120,6 +185,44 @@
             </div>
         </div>
     </div>
+    
+    <div id="secretAreaScreen" class="screen hidden secret-night-bg">
+    <div class="stars"></div>
+    <div class="twinkling"></div>
+    
+    <button class="btn-back-cute btn-ice" id="btnBackFromSecret">
+        <i class="fas fa-chevron-left"></i> Trang chính
+    </button>
+    
+    <div class="card-wrapper" style="max-width: 800px;">
+        <div class="home-header secret-header-ice">
+            <h1 class="main-title text-glow">Khu vực bí mật 🤫</h1>
+            <p class="subtitle text-light">Chúc mừng bạn đã phát hiện ra nơi ẩn này!</p>
+        </div>
+        
+        <div class="gifts-grid">
+            <div class="gift-item secret-gift-1" id="giftSecret1">
+                <div class="gift-icon">💎</div>
+                <div class="gift-name">Món quà<br>siêu cấp</div>
+            </div>
+            
+            <div class="gift-item secret-gift-2" id="giftSecret2">
+                <div class="gift-icon">🌠</div>
+                <div class="gift-name">Hộp<br>ước nguyện</div>
+            </div>
+            
+            <div class="gift-item secret-gift-3" id="giftSecret3">
+                <div class="gift-icon">🎲</div>
+                <div class="gift-name">Đố vui<br>sinh nhật</div>
+            </div>
+            
+            <div class="gift-item secret-gift-4" id="giftSecret4">
+                <div class="gift-icon">🎡</div>
+                <div class="gift-name">Vòng quay<br>may mắn</div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <div id="cherryBlossomScreen" class="screen hidden game-scene-screen">
         <div id="fireworksContainer"></div>
@@ -129,7 +232,7 @@
             <div class="scrolling-text">
                 <p>Thêm một tuổi mới,</p>
                 <p>Thêm nhiều niềm vui.</p>
-                <p>Chúc cậu luôn giữ nụ cười,</p>
+                <p>Chúc m luôn giữ nụ cười,</p>
                 <p>Và một đời an nhiên, rực rỡ...</p>
                 <p class="wish-signature">- Từ ẩn danh -</p>
             </div>
@@ -326,6 +429,145 @@
             <div class="modal-buttons">
                 <button id="btnYes" class="btn-modal btn-yes">Đồng ý 😍</button>
                 <button id="btnNo" class="btn-modal btn-no">Từ chối 😒</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="cakePrankOverlay" class="prank-overlay hidden">
+        <div id="splat-effect" class="splat-effect hidden"></div>
+        <div class="prank-confetti"></div>
+        
+        <div class="cake-container">
+            <div class="boom-text">BÙMM! 💥</div>
+            
+            <div class="cake-splat-svg">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="100" y="250" width="300" height="150" rx="20" fill="#fce4ec"/>
+                    <rect x="150" y="150" width="200" height="100" rx="20" fill="#f8bbd0"/>
+                    <path d="M100 270 Q120 250 140 270 T180 270 T220 270 T260 270 T300 270 T340 270 T380 270 Q400 250 400 270" fill="#fff" stroke="#ff80ab" stroke-width="3"/>
+                    <path d="M150 170 Q160 160 170 170 T190 170 T210 170 T230 170 T250 170 T270 170 T290 170 Q300 160 300 170" fill="#fff" stroke="#ff80ab" stroke-width="3"/>
+                    <circle cx="120" cy="350" r="10" fill="#ffeb3b"/>
+                    <circle cx="150" cy="370" r="10" fill="#4caf50"/>
+                    <circle cx="200" cy="330" r="10" fill="#2196f3"/>
+                    <circle cx="250" cy="360" r="10" fill="#9c27b0"/>
+                    <circle cx="300" cy="340" r="10" fill="#f44336"/>
+                    <circle cx="350" cy="370" r="10" fill="#ffeb3b"/>
+                    <circle cx="180" cy="210" r="10" fill="#4caf50"/>
+                    <circle cx="220" cy="190" r="10" fill="#2196f3"/>
+                    <circle cx="260" cy="220" r="10" fill="#9c27b0"/>
+                    <circle cx="300" cy="200" r="10" fill="#f44336"/>
+                    <rect x="230" y="50" width="20" height="100" fill="#ffeb3b"/>
+                    <rect x="230" y="40" width="20" height="10" fill="#fff"/>
+                    <polygon points="230,40 250,40 240,20" fill="#f44336"/>
+                </svg>
+            </div>
+            
+            <div class="prank-final-text">
+                Quà là tình bạn<br>của chúng ta 😤<br>(Đòi hỏi gì nữa???)
+            </div>
+            
+            <button class="btn-close-prank" id="btnClosePrank">Cay thế! 😾</button>
+        </div>
+    </div>
+
+    <div id="wishBoxOverlay" class="prank-overlay hidden">
+        
+        <div id="wishStep1" class="wish-step-container">
+            <div class="wish-form-card">
+                <h3>Gửi tâm sự vào vũ trụ ✨</h3>
+                <p>Mọi điều bạn viết ở đây sẽ được các vì sao lắng nghe...</p>
+                <textarea id="wishTextarea" placeholder="Nhập điều ước hoặc tâm sự của bạn vào đây nha... 📝"></textarea>
+                <div class="wish-buttons">
+                    <button id="btnCloseWishBox" class="btn-wish-cancel">Hủy</button>
+                    <button id="btnSendWish" class="btn-wish-send">Gửi đi 🚀</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="wishStep2" class="wish-step-container hidden">
+            <div class="burning-scene">
+                <div class="paper-to-burn">
+                    <div class="paper-line"></div>
+                    <div class="paper-line"></div>
+                    <div class="paper-line"></div>
+                </div>
+                <div class="fire-flames">
+                    <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <path class="flame-main" d="M50 0 Q70 40 70 70 A20 20 0 0 1 30 70 Q30 40 50 0 Z" fill="#ff9800"/>
+                        <path class="flame-inner" d="M50 20 Q60 50 60 70 A10 10 0 0 1 40 70 Q40 50 50 20 Z" fill="#ffeb3b"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+        <div id="wishStep3" class="wish-step-container hidden">
+            <div class="star-container">
+                <div id="clickableStar" class="magic-star">⭐</div>
+                <p class="star-hint">Có một vì sao rơi xuống kìa, bấm vào đi!</p>
+            </div>
+        </div>
+
+        <div id="wishStep4" class="wish-step-container hidden">
+            <div class="cute-letter-card">
+                <div class="moon-icon">🌙</div>
+                <div class="letter-content">
+                    Vũ trụ đã nhận được<br>rồi nha!
+                </div>
+                <button id="btnFinishWish" class="btn-wish-send" style="margin-top: 20px;">Tuyệt vời! 🥰</button>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="quizOverlay" class="prank-overlay hidden">
+        
+        <div id="quizBox" class="quiz-card">
+            <div class="quiz-header">
+                <span class="quiz-progress">Câu <span id="currentQNum">1</span>/5 🤔</span>
+            </div>
+            
+            <h3 id="quizQuestion" class="quiz-question">Đang tải câu hỏi...</h3>
+            
+            <div class="quiz-options" id="quizOptionsContainer">
+                </div>
+        </div>
+
+        <div id="quizResultBox" class="quiz-card hidden">
+            <div id="quizEmoji" class="quiz-emoji">🏆</div>
+            <h3>Kết quả "Kiểm Tra Nhân Phẩm"</h3>
+            <p class="quiz-score-text">Đúng <span id="quizScoreNum">0</span>/5 câu!</p>
+            <p id="quizTrollMsg" class="quiz-troll-msg">Đang tính toán mức độ... tồi tệ của bạn.</p>
+            <button id="btnCloseQuiz" class="btn-wish-send" style="margin-top: 25px;">Thoát trong nhục nhã 🏃‍♀️</button>
+        </div>
+
+    </div>
+
+    <div id="wheelOverlay" class="prank-overlay hidden">
+        <div class="wheel-card">
+            <button id="btnCloseWheel" class="btn-close-corner"><i class="fas fa-times"></i></button>
+            <h3>Vòng Quay "Nhân Phẩm" 🎡</h3>
+            <p>Xoay đi chờ chi! Xem vũ trụ gọi tên bạn vào ô nào nha~</p>
+            
+            <div class="wheel-container">
+                <div class="wheel-pointer">▼</div>
+                <div id="spinWheel" class="spin-wheel">
+                    <div class="wheel-slice" style="transform: rotate(0deg);"><span class="slice-text">Khen 🎀</span></div>
+                    <div class="wheel-slice" style="transform: rotate(60deg);"><span class="slice-text">Fact 🧠</span></div>
+                    <div class="wheel-slice" style="transform: rotate(120deg);"><span class="slice-text">Thách 🎯</span></div>
+                    <div class="wheel-slice" style="transform: rotate(180deg);"><span class="slice-text">Troll 🤡</span></div>
+                    <div class="wheel-slice" style="transform: rotate(240deg);"><span class="slice-text">May 🍀</span></div>
+                    <div class="wheel-slice" style="transform: rotate(300deg);"><span class="slice-text">Xui 🌚</span></div>
+                </div>
+                <button id="btnSpin" class="btn-spin-center">QUAY</button>
+            </div>
+        </div>
+
+        <div id="wheelResultPopup" class="wheel-result-popup hidden">
+            <div class="wheel-result-content">
+                <div id="wheelResultIcon" class="wheel-result-icon">✨</div>
+                <h2 id="wheelResultTitle">Đang tính toán...</h2>
+                <p id="wheelResultDesc">...</p>
+                <button id="btnAcceptWheelResult" class="btn-wish-send" style="margin-top: 20px;">Đã rõ 🤣</button>
             </div>
         </div>
     </div>
