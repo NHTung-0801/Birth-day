@@ -2,28 +2,28 @@
 const giftsData = [
     {
         id: 1, giftName: "Quà Đặc Biệt", icon: "👑",
-        image: "/qua-dac-biet.jpg",
+        image: "images/qua-dac-biet.jpg",
         title: "Dự án nghìn tỷ!", recipient: "Phú bà tương lai",
         wishText: "Chúc cho chặng đường tới của cô giáo thậtt bùng nổ nhaa! Deadline chạy êm ru và thi cử lúc nào cũng điểm cao chót vót luônn. Trở thành phú bà nhớ bao t ăn nhaa 👑💰",
         signature: "- Ký tên: Bạn nghèo chờ bao -"
     },
     {
         id: 2, giftName: "Quà Tinh Thần", icon: "💌",
-        image: "/qua-tinh-than.jpg",
+        image: "images/qua-tinh-than.jpg",
         title: "Thẻ đen quyền lực!", recipient: "Người bạn kiên cường",
         wishText: "Lại thêm một tuổi gòi sao? Chúc m tuổi mới luôn vuii vẻ nhaa. T là tổng tài bá đạo, nay đặc cách cho m mượn thẻ đen của t để quẹt thoả thích luônn (nhưng trong hạn mức 50 cành thôii nèe 🤣). Nhớ xài tiết kiệm nhaa! 🥳🎁",
         signature: "- Ký tên: Tổng tài rỗng túi -"
     },
     {
         id: 3, giftName: "Quà Chữa Lành", icon: "🍀",
-        image: "/qua-chua-lanh.jpg",
+        image: "images/qua-chua-lanh.jpg",
         title: "Lệnh từ ban giám đốc!", recipient: "Nhân viên xuất sắc",
         wishText: "Có chỉ thị khẩn cấp: Bắt đầu từ hôm nay, cô bị ép buộc phải luôn xinh xẻo và cười thậtt nhiều mỗi ngày luônn á! Nếu làm trái lệnh, tổng tài sẽ phạt cô phải đi khao một chầu lẩu nhaa 🤤🍲. Rõ chưaa?",
         signature: "- Ký tên: Chủ tịch giấu tên -"
     },
     {
         id: 4, giftName: "Quà Bí Mật", icon: "🎁", 
-        image: "/qua-bi-mat.jpg",
+        image: "images/qua-bi-mat.jpg",
         title: "Bản hợp đồng vô giá...", recipient: "Gửi tới cô giáo",
         wishText: "Tèn tennn! Phần bí mậtt nhất là bản hợp đồng làm bạn với t trọn đời luônn á! Không có lương đâu nhưng bù lại máy tính có lỗi hay lag là có IT fix bug giùm miễn phí luônn 😎. Tuổi mới thậtt rạng rỡ nhaa, deadline có dí quá thì ới một tiếng t phụ một tay luônn 💻✨🎁",
         signature: "- Ký tên: Demon -"
@@ -1120,7 +1120,7 @@ if (btnAcceptWheelResult) {
 // Tạo dữ liệu tách biệt hoàn toàn khỏi 4 hộp quà kia
 const giftChotSo = {
     id: 5, giftName: "Quà Chốt Sổ", icon: "🎟️", 
-    image: "/qua-chot-so.jpg", 
+    image: "images/qua-chot-so.jpg", 
     title: "Quyết không lẻ loi!", recipient: "Lá thư cuối cùng",
     wishText: "Surprise!!! Tưởng hết rồi đúng hông? Thực ra chiếc phiếu cuối không có gì đâu, chỉ là nhóm có 5 thành viên mà thiếu 1 thì lẻ loi quá heheee 😼🎉",
     signature: "- Ký tên: Master giấu quà -"
