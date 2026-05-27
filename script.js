@@ -682,20 +682,47 @@ if (giftSecret1) {
                 createSplatFragments(splatEffect);
             }
 
-            // Bắn pháo hoa ăn mừng
+            // Bắn pháo hoa ăn mừng — rực rỡ hơn
             if (typeof confetti === 'function') {
-                confetti({
-                    particleCount: 250, spread: 200, origin: { y: 0.5 },
-                    colors: ['#FCE4EC', '#F8BBD0', '#fff', '#ffeb3b', '#4caf50', '#2196f3'] 
-                });
+                confetti({ particleCount: 180, spread: 160, origin: { y: 0.55 }, colors: ['#ffd700','#ff6b9d','#c678ff','#00e5ff','#ff6b00','#69ff69'] });
+                setTimeout(() => confetti({ particleCount: 100, spread: 120, origin: { x: 0.1, y: 0.6 }, colors: ['#ffd700','#ff6b9d','#c678ff'] }), 200);
+                setTimeout(() => confetti({ particleCount: 100, spread: 120, origin: { x: 0.9, y: 0.6 }, colors: ['#00e5ff','#ff6b00','#ffd700'] }), 400);
             }
-        }, 600); // 600ms = 0.6s
+            // Tạo mưa confetti CSS bên trong overlay
+            spawnPrankConfetti(cakePrankOverlay);
+        }, 580);
     });
+}
+
+// Mưa confetti CSS bên trong overlay
+function spawnPrankConfetti(overlay) {
+    const colors = ['#ffd700','#ff6b9d','#c678ff','#00e5ff','#ff6b00','#69ff69','#ff4757','#fff'];
+    const shapes = ['2px 0 6px 0','50%','0'];
+    for (let i = 0; i < 55; i++) {
+        const el = document.createElement('div');
+        el.className = 'prank-confetti-piece';
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        const size = 6 + Math.random() * 10;
+        el.style.cssText = `
+            left: ${Math.random() * 100}%;
+            top: -20px;
+            width: ${size}px;
+            height: ${size * (0.6 + Math.random())}px;
+            background: ${color};
+            border-radius: ${shapes[Math.floor(Math.random() * shapes.length)]};
+            --cd: ${1.8 + Math.random() * 2.2}s;
+            --delay: ${Math.random() * 1.2}s;
+            --cr: ${(Math.random() - 0.5) * 720}deg;
+            opacity: 0;
+        `;
+        overlay.appendChild(el);
+        setTimeout(() => el.remove(), 4500);
+    }
 }
 
 // Hàm vẽ các mảnh vỡ bay tứ tung
 function createSplatFragments(container) {
-    const colors = ['#fce4ec', '#f8bbd0', '#fff', '#ffeb3b', '#4caf50', '#2196f3', '#9c27b0', '#f44336'];
+    const colors = ['#ffd700','#ff6b9d','#c678ff','#00e5ff','#ff6b00','#69ff69','#ff4757','#fff'];
     const svgNS = "http://www.w3.org/2000/svg";
     
     // Tạo 30 mảnh vỡ
@@ -734,9 +761,10 @@ if (btnClosePrank) {
         if (cakePrankOverlay) {
             cakePrankOverlay.classList.remove('active');
             cakePrankOverlay.classList.add('hidden');
-            // Dọn dẹp chiến trường
             setTimeout(() => {
                 if (splatEffect) splatEffect.innerHTML = '';
+                // Xóa confetti pieces
+                cakePrankOverlay.querySelectorAll('.prank-confetti-piece').forEach(el => el.remove());
             }, 300);
         }
     });
