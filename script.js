@@ -60,6 +60,11 @@ const confirmModal = document.getElementById('confirmModal');
 const btnYes = document.getElementById('btnYes');
 const btnNo = document.getElementById('btnNo');
 const fireworksContainer = document.getElementById('fireworksContainer');
+// Thêm khai báo này vào cùng nhóm DOM ELEMENTS
+const hbMusic = document.getElementById('hbMusic');
+if (hbMusic) {
+    hbMusic.volume = 0.4; // Đặt âm lượng 0.4 (40%) để nhạc phát "dịu nhẹ", không bị quá to
+}
 
 // ================= LOGIC ĐĂNG NHẬP =================
 function checkPassword() {
@@ -67,12 +72,16 @@ function checkPassword() {
     const enteredName = nameInput.value.trim().toLowerCase().normalize('NFC');
     
     // Vì đã dùng toLowerCase(), chúng ta chỉ cần so sánh với phiên bản chữ thường chuẩn nhất
-    if (enteredName === "lê thùy linh" || enteredName === "lê thuỳ linh" || enteredName === "cô giáo tập sự") {
+    if (enteredName === "thùy linh" || enteredName === "thuỳ linh" ||enteredName === "lê thùy linh" || enteredName === "lê thuỳ linh" || enteredName === "cô giáo tập sự") {
         
         // nameInput.value.trim() ở đây sẽ giữ nguyên định dạng viết hoa/viết thường ban đầu của người nhập để hiển thị cho đẹp
         greetingText.innerText = "Chúc mừng sinh nhật " + nameInput.value.trim() + " nha! 🎉";
         loginScreen.classList.remove('active');
         loginScreen.classList.add('hidden');
+
+        if (hbMusic) {
+            hbMusic.play().catch(e => console.log("Trình duyệt chặn autoplay, nhưng bấm nút login rồi nên sẽ chạy mượt!"));
+        }
 
         // Vào màn hình Matrix Countdown
         startMatrixCountdown(() => {
@@ -169,6 +178,10 @@ btnGoToChill.addEventListener('click', () => {
     dashboardScreen.classList.add('hidden');
     
     stopContinuousFestive(); // TẮT TUA RUA
+
+    if (hbMusic) {
+        hbMusic.pause();
+    }
     
     setTimeout(() => {
         cherryBlossomScreen.classList.remove('hidden');
@@ -186,6 +199,10 @@ btnBackFromChill.addEventListener('click', () => {
     
     stopFireworksLoop(); // TẮT PHÁO HOA
     startContinuousFestive(); // BẬT LẠI TUA RUA
+
+    if (hbMusic) {
+        hbMusic.play().catch(e => console.log(e));
+    }
     
     setTimeout(() => {
         dashboardScreen.classList.remove('hidden');
@@ -585,7 +602,7 @@ const giftSecret4 = document.getElementById('giftSecret4');
 // THÊM MỚI: Lấy các phần tử cho cú lừa bánh kem và âm thanh
 const cakePrankOverlay = document.getElementById('cakePrankOverlay');
 const btnClosePrank = document.getElementById('btnClosePrank');
-const splatSound = new Audio('poc.mp3'); // Nhớ tải file poc.mp3 để cùng thư mục nhé!
+const splatSound = new Audio('audio/poc.mp3'); // Nhớ tải file poc.mp3 để cùng thư mục nhé!
 
 // 2. Logic chuyển trang khi bấm vào cuốn lịch
 if (cuteCalendar) {
@@ -853,10 +870,23 @@ const questionBank = [
     { q: "Nếu trúng số 10 tỷ, điều đầu tiên bạn làm với tôi là gì?", opts: ["Bao đi ăn lẩu ngay và luôn", "Mua vé VIP concert Cortis", "Phát card 500k", "Quên luôn người bạn này"], ans: 0 },
     { q: "Điểm đáng yêu nhất của bạn là gì?", opts: ["Không có điểm nào", "Rất hay bao đi ăn", "Độ simp Cortis", "Lâu lâu bị khùng"], ans: 3 },
     { q: "Khi nghe nhạc Cortis, biểu hiện của bạn thường là...", opts: ["Hát nghêu ngao sai tông", "Nhắm mắt deep deep", "Ngủ gật", "Bắt người khác phải nghe cùng"], ans: 0 },
-    { q: "Món quà sinh nhật nào làm bạn 'rung rinh' nhất?", opts: ["Chuyển khoản ting ting", "Tình bạn chân thành này", "Album Cortis có chữ ký", "Thẻ đen quyền lực"], ans: 2 },
+    { q: "Món quà sinh nhật nào làm bạn 'rung rinh' nhất?", opts: ["Chuyển khoản ting ting", "Suýt soát đạt điểm đậu", "Album Cortis có chữ ký", "Thẻ đen quyền lực"], ans: 2 },
     { q: "Người bạn (là tui nè) trong mắt bạn trông như thế nào?", opts: ["Đẹp tuyệt trần", "Nhiều tiền hay bao", "Hơi ngốc nhưng nhiệt tình", "Một cục nợ đời"], ans: 0 },
     { q: "Định nghĩa về một ngày hoàn hảo của bạn?", opts: ["Nằm ườn ra giường", "Ăn, ngủ và nghe Cortis", "Chạy deadline sml", "Đi đu idol"], ans: 1 },
-    { q: "Điều gì bạn không bao giờ chán?", opts: ["Ngủ", "Nghe nhạc Cortis", "Nhìn tôi", "Trà sữa full topping"], ans: 1 }
+    { q: "Điều gì bạn không bao giờ chán?", opts: ["Ngủ", "Nghe nhạc Cortis", "Lướt tiktok", "Trà sữa full topping"], ans: 1 },
+
+    // 10 CÂU MỚI BỔ SUNG - PHIÊN BẢN BẠN THÂN CÀ KHỊA
+    { q: "Nếu tui và Cortis cùng rơi xuống nước, bạn sẽ làm gì?", opts: ["Lấy điện thoại ra livestream", "Cứu Cortis, còn tui thì... kệ", "Hét lên: Cortis ơiiii!", "Chạy đi mua ly trà sữa đứng xem"], ans: 1 },
+    { q: "Câu nói nào của tui có sức mạnh 'chữa lành' tâm hồn bạn nhất?", opts: ["Code chạy được rồi kìa!", "Mai nghỉ học nha", "Nay tui bao lẩu!", "Chuyển khoản rồi check đi"], ans: 2 },
+    { q: "Lý do lớn nhất khiến bạn vẫn 'ế' thâm niên là gì?", opts: ["Ảo tưởng mình là người yêu của Cortis", "Cái nết quá khó chiều", "Tại chơi với tui nên ế lây", "Tiêu chuẩn trên trời dưới vực"], ans: 0 },
+    { q: "Kỹ năng sinh tồn 'vô tri' nhưng đạt tới cảnh giới của bạn là gì?", opts: ["Ngủ ngày cày đêm", "Nước đến mũi mới đi mua ống thở", "Cãi cùn không chớp mắt", "Gấp sách đi ngủ, mai tính"], ans: 1 },
+    { q: "Sự kiện nào sau đây có xác suất xảy ra thấp nhất?", opts: ["Bạn tự nhiên có bồ", "Tui tự nhiên hết nghèo", "Cortis biết bạn là ai", "Chúng ta làm bài tập đúng hạn"], ans: 0 },
+    { q: "Lời nói dối 'kinh điển' nhất bạn hay nói với tui là gì?", opts: ["Tui đang trên đường tới! (Vừa mới dậy)", "Tui hết tiền rồi (vừa mua đồ đu idol)", "Mai tui sẽ học hành chăm chỉ", "Tui ăn ít lắm"], ans: 0 },
+    { q: "Phản ứng chân thật nhất của bạn khi deadline dí tới đít?", opts: ["Bật mode siêu nhân 200%", "Nằm khóc ăn vạ", "Đi ngủ, hy vọng mai có phép màu", "Bật nhạc Cortis lên quẩy trốn tránh thực tại"], ans: 3 },
+    { q: "Tần suất bạn thao túng tâm lý tui bằng nhạc Cortis là bao nhiêu?", opts: ["Thỉnh thoảng mới bật", "1 tiếng/ngày", "25/24 tiếng", "Lúc tui ngủ mới tha"], ans: 2 },
+    { q: "Nếu được chọn một siêu năng lực, bạn sẽ chọn gì?", opts: ["Ăn vạn vật không béo", "Bắt tui làm osin sai vặt", "Dịch chuyển tức thời tới chỗ Cortis", "Có não siêu phàm để pass môn"], ans: 2 },
+    { q: "Tóm lại, tình bạn của chúng ta tồn tại vững bền là nhờ đâu?", opts: ["Cùng ế và cùng nghèo", "Chưa tìm được ai khác chơi cùng", "Sự chịu đựng phi thường của tui", "Tui bị ép buộc"], ans: 2 }
+
 ];
 
 let selectedQuestions = [];
